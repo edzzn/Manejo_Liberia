@@ -44,7 +44,7 @@ class Ui_Form(object):
         self.pushButton_4.setObjectName(_fromUtf8("pushButton_4"))
         self.gridLayout.addWidget(self.pushButton_4, 3, 0, 1, 1)
 
-        self.retranslateUi(Form)
+        # self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
