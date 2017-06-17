@@ -6,8 +6,12 @@ def init():
     """
     global reg_reservas
     global reg_prestamos
+    global reg_libros
+    global reg_estudiantes
     reg_reservas = RegistroReserva()
     reg_prestamos = RegistroPrestamos()
+    reg_libros = []
+    reg_estudiantes = []
 
 
 if __name__ == '__main__':
