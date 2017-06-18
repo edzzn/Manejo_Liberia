@@ -23,10 +23,11 @@ if __name__ == '__main__':
 
     reg_estudiantes = [estudiante1, estudiante2, estudiante3, estudiante4]
 
-    libro1 = Libro('001', 'N1', 'Aut1', 'cat1', '1991')
-    libro2 = Libro('002', 'N2', 'Aut2', 'cat2', '1992')
-    libro3 = Libro('003', 'N3', 'Aut3', 'cat3', '1993')
-    libro4 = Libro('004', 'N4', 'Aut4', 'cat4', '1994')
+    #            (isbn, numPag, idioma, autor, editorial, categoria):
+    libro1 = Libro('001', 'N1', 'es', 'Aut1', 'cat1', '1991')
+    libro2 = Libro('002', 'N2', 'es', 'Aut2', 'cat2', '1992')
+    libro3 = Libro('003', 'N3', 'es', 'Aut3', 'cat3', '1993')
+    libro4 = Libro('004', 'N4', 'es', 'Aut4', 'cat4', '1994')
 
     reg_libros = [libro1, libro2, libro3, libro4]
 
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     for e, l in zip(reg_estudiantes, reg_libros):
         i = random.randrange(10)
         j = random.randrange(10)
-        reg_reservas.add(e, l, str(i), str(j))
+        reg_reservas.add(e, l, str(i), str(j), str(i+j))
 
     saveD('l', reg_libros)
     saveD('e', reg_estudiantes)

@@ -97,7 +97,6 @@ class MainWindow(QtGui.QMainWindow):
         self.fileToolBar.addAction(self.maintReservasAct)
 
     def create_list_prestamos(self):
-        import data
         lbl_registro = QtGui.QLabel('Reservas:', self)
         self.textBrowser = QtGui.QTextBrowser(self)
 
