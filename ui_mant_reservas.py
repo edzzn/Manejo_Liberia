@@ -1,5 +1,5 @@
 from PyQt4 import QtGui
-from ui_mantenimiento_reservas_new import NewReservaWindow
+from ui_mant_reservas_new import NewReservaWindow
 
 # Debug only
 import inspect

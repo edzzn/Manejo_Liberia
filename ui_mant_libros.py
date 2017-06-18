@@ -1,23 +1,23 @@
 from PyQt4 import QtGui
-from ui_mantenimiento_reservas_new import NewReservaWindow
+from ui_mant_reservas_new import NewReservaWindow
 
 # Debug only
 import inspect
 
 
-class MenuEstudiantes(QtGui.QWidget):
+class MenuLibros(QtGui.QWidget):
     """
-        Ventana-menu para editar Estudiantes
+        Ventana-menu para editar Libros
     """
     def __init__(self):
-        super(MenuEstudiantes, self).__init__()
+        super(MenuLibros, self).__init__()
 
         self.createButtons()
 
-        self.setWindowTitle('Mantenimiento Estudiantes')
+        self.setWindowTitle('Mantenimiento Libros')
 
         self.setWindowIcon(QtGui.QIcon('images/user-plus.png'))
-        self.setWindowTitle("Mantenimiento Estudiantes")
+        self.setWindowTitle("Mantenimiento Libros")
         self.setGeometry(650, 300, 150, 100)
 
     def createButtons(self):
@@ -77,6 +77,6 @@ if __name__ == '__main__':
     import sys
 
     app = QtGui.QApplication(sys.argv)
-    mainWin = MenuEstudiantes()
+    mainWin = MenuLibros()
     mainWin.show()
     sys.exit(app.exec_())

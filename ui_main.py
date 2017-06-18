@@ -1,9 +1,9 @@
 from PyQt4 import QtGui
 import sys
-from ui_maint_reservas import MenuMaintReservas
-from ui_maint_libros import MenuLibros
-from ui_maint_estudiantes import MenuEstudiantes
-from ui_maint_categorias import MenuCategorias
+from ui_mant_reservas import MenuMaintReservas
+from ui_mant_libros import MenuLibros
+from ui_mant_estudiantes import MenuEstudiantes
+from ui_mant_categorias import MenuCategorias
 from CoreData import saveD, loadD
 
 # for test Only
