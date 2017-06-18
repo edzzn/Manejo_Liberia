@@ -5,24 +5,24 @@ from ui_mantenimiento_reservas_new import NewReservaWindow
 import inspect
 
 
-class MenuMaintReservas(QtGui.QWidget):
+class MenuCategorias(QtGui.QWidget):
     """
-        Ventana-menu para editar reservas
+        Ventana-menu para editar Libros
     """
     def __init__(self):
-        super(MenuMaintReservas, self).__init__()
+        super(MenuCategorias, self).__init__()
 
         self.createButtons()
 
-        self.setWindowTitle('Mantenimiento Reservas')
+        self.setWindowTitle('Mantenimiento Categorias')
 
         self.setWindowIcon(QtGui.QIcon('images/user-plus.png'))
-        self.setWindowTitle("Mantenimiento Reservas")
+        self.setWindowTitle("Mantenimiento Categorias")
         self.setGeometry(650, 300, 150, 100)
 
     def createButtons(self):
         btn_new_reserva = QtGui.QPushButton('Nuevo')
-        btn_new_reserva.clicked.connect(self.open_new_reserva_window)
+        btn_new_reserva.clicked.connect(self.close)
 
         btn_edit_reserva = QtGui.QPushButton('Editar')
         btn_edit_reserva.clicked.connect(self.close)
@@ -77,6 +77,6 @@ if __name__ == '__main__':
     import sys
 
     app = QtGui.QApplication(sys.argv)
-    mainWin = MenuMaintReservas()
+    mainWin = MenuCategorias()
     mainWin.show()
     sys.exit(app.exec_())

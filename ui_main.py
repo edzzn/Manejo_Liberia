@@ -1,6 +1,9 @@
 from PyQt4 import QtGui
 import sys
 from ui_maint_reservas import MenuMaintReservas
+from ui_maint_libros import MenuLibros
+from ui_maint_estudiantes import MenuEstudiantes
+from ui_maint_categorias import MenuCategorias
 from CoreData import saveD, loadD
 
 # for test Only
@@ -28,12 +31,18 @@ class MainWindow(QtGui.QMainWindow):
         print(inspect.stack()[0][3])
 
     def open_mantenimiento_libro_window(self):
+        self.main_libros_view = MenuLibros()
+        self.main_libros_view.show()
         print(inspect.stack()[0][3])
 
     def open_mantenimiento_estudiante_window(self):
+        self.main_estudiantes_view = MenuEstudiantes()
+        self.main_estudiantes_view.show()
         print(inspect.stack()[0][3])
 
     def open_mantenimiento_categoria_window(self):
+        self.main_categorias_view = MenuCategorias()
+        self.main_categorias_view.show()
         print(inspect.stack()[0][3])
 
     def open_mantenimiento_reserva_window(self):
@@ -58,10 +67,16 @@ class MainWindow(QtGui.QMainWindow):
                                            statusTip="Mantenimiento Registro Estudiantes",
                                             triggered=self.open_mantenimiento_estudiante_window)
 
+        self.maintCategoriasAct = QtGui.QAction(QtGui.QIcon('images/user-plus.png'),
+                "&Mantenimiento Categorias", self,
+                                            # shortcut=QtGui.QKeySequence.New,
+                                            statusTip="Mantenimiento Registro Categorias",
+                                            triggered=self.open_mantenimiento_categoria_window)
+
         self.maintReservasAct = QtGui.QAction(QtGui.QIcon('images/user-plus.png'),
                 "&Mantenimiento Reservas", self,
                                             # shortcut=QtGui.QKeySequence.New,
-                                           statusTip="Mantenimiento Registro Libros",
+                                           statusTip="Mantenimiento Registro Reservas",
                                             triggered=self.open_mantenimiento_reserva_window)
 
         # self.maintCategoriasAct = QtGui.QAction(QtGui.QIcon('images/user-plus.png'),
@@ -82,6 +97,7 @@ class MainWindow(QtGui.QMainWindow):
         self.maintenanceMenu = self.menuBar().addMenu("&Mantenimiento")
         self.maintenanceMenu.addAction(self.maintLibrosAct)
         self.maintenanceMenu.addAction(self.maintEstudiantesAct)
+        self.maintenanceMenu.addAction(self.maintCategoriasAct)
         self.maintenanceMenu.addAction(self.maintReservasAct)
 
         self.helpMenu = self.menuBar().addMenu("&Ayuda")
@@ -94,6 +110,7 @@ class MainWindow(QtGui.QMainWindow):
         self.fileToolBar = self.addToolBar("Archivo")
         self.fileToolBar.addAction(self.maintLibrosAct)
         self.fileToolBar.addAction(self.maintEstudiantesAct)
+        self.fileToolBar.addAction(self.maintCategoriasAct)
         self.fileToolBar.addAction(self.maintReservasAct)
 
     def create_list_prestamos(self):
@@ -109,12 +126,12 @@ class MainWindow(QtGui.QMainWindow):
         text = ''
         for estudiante in dic_reg_reservas:
             nombre_estudiante = estudiante.name
-            nombre_libro = dic_reg_reservas[estudiante][0][0].name
+            isbn_libro = dic_reg_reservas[estudiante][0][0].get_isbn()
             fch_out = dic_reg_reservas[estudiante][0][1]
             fch_ret = dic_reg_reservas[estudiante][0][2]
 
 
-            text = text + '\n' + nombre_estudiante + ' ' + nombre_libro + ' : ' + fch_out + ' - ' + fch_ret
+            text = text + '\n' + nombre_estudiante + ' ' + isbn_libro  + ' : ' + fch_out + ' - ' + fch_ret
 
         self.textBrowser.setText(text)
 
