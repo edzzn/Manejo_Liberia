@@ -1,6 +1,7 @@
 from PyQt4 import QtGui
 import sys
 from ui_maint_reservas import MenuMaintReservas
+from CoreData import saveD, loadD
 
 # for test Only
 import inspect
@@ -16,6 +17,7 @@ class MainWindow(QtGui.QMainWindow):
         self.create_menus()
         self.create_toolBars()
         self.create_statusBar()
+        self.create_list_prestamos()
 
         # self.setWindowIcon(QtGui.QIcon('images/logo.png'))
         self.setWindowTitle('Gestión Biblioteca')
@@ -94,7 +96,28 @@ class MainWindow(QtGui.QMainWindow):
         self.fileToolBar.addAction(self.maintEstudiantesAct)
         self.fileToolBar.addAction(self.maintReservasAct)
 
+    def create_list_prestamos(self):
+        import data
+        lbl_registro = QtGui.QLabel('Reservas:', self)
+        self.textBrowser = QtGui.QTextBrowser(self)
 
+        lbl_registro.move(50, 65)
+        self.textBrowser.move(50, 100)
+        self.textBrowser.resize(300,150)
+
+        registros = loadD('r')
+        dic_reg_reservas = registros.reg_reservas
+        text = ''
+        for estudiante in dic_reg_reservas:
+            nombre_estudiante = estudiante.name
+            nombre_libro = dic_reg_reservas[estudiante][0][0].name
+            fch_out = dic_reg_reservas[estudiante][0][1]
+            fch_ret = dic_reg_reservas[estudiante][0][2]
+
+
+            text = text + '\n' + nombre_estudiante + ' ' + nombre_libro + ' : ' + fch_out + ' - ' + fch_ret
+
+        self.textBrowser.setText(text)
 
 
 if __name__ == '__main__':

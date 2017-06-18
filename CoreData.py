@@ -1,3 +1,5 @@
+import pickle
+
 class Estudiante():
 
     def __init__(self, cedula, name, lastname):
@@ -43,6 +45,9 @@ class RegistroPrestamos():
         self.reg_prestamos = {}
         self.num_prestamo = 0
 
+    def show_persona(self):
+        return self.reg_prestamos
+
     def add(self, estudiante, libro, fecha_prestamo, fecha_devolucion=""):
         nuevo_registro = (libro, fecha_prestamo, fecha_devolucion)
 
@@ -51,3 +56,37 @@ class RegistroPrestamos():
             self.reg_prestamos[estudiante].append(nuevo_registro)
         else:
             self.reg_prestamos[estudiante] = nuevo_registro
+
+
+def saveD(tipo, objeto):
+
+    file_name = get_file_name(tipo)
+    pickle.dump(objeto, open(file_name, "wb"))
+
+
+def loadD(tipo):
+    file_name = get_file_name(tipo)
+    # Objetiene la información serializada
+    data = pickle.load(open(file_name, "rb"))
+    return data
+
+
+def get_file_name(tipo):
+    # l -> libros
+    # p -> prestamos
+    # r -> reservas
+    # e -> estudiantes
+    # c -> categoria
+
+    if tipo == 'l':
+        return 'data_libros.dat'
+    elif tipo == 'p':
+        return 'data_prestamos.dat'
+    elif tipo == 'r':
+        return 'data_reservas.dat'
+    elif tipo == 'e':
+        return 'data_estudiantes.dat'
+    elif tipo == 'c':
+        return 'data_categorias.dat'
+    else:
+        print('No se puede guardar el archivo')

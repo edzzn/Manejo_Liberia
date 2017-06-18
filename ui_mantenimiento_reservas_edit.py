@@ -35,7 +35,6 @@ class AddWindow(QtGui.QWidget):
             self.lbl_info.setText('Reserva Agregada')
             self.clear_campos()
 
-
     def clear_campos(self):
         self.txt_id_estudiante.clear()
         self.txt_nombre_libro.clear()

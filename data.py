@@ -1,4 +1,5 @@
-from CoreData import RegistroReserva, RegistroPrestamos
+from CoreData import RegistroReserva, RegistroPrestamos, saveD, loadD, Estudiante, Libro
+
 
 def init():
     """
@@ -15,9 +16,31 @@ def init():
 
 
 if __name__ == '__main__':
-    # init()
+    estudiante1 = Estudiante('001', 'Edisson', 'Reinozo')
+    estudiante2 = Estudiante('002', 'Ediss', 'Reino')
+    estudiante3 = Estudiante('003', 'Edi', 'Rei')
+    estudiante4 = Estudiante('004', 'Ed', 'R')
+
+    reg_estudiantes = [estudiante1, estudiante2, estudiante3, estudiante4]
+
+    libro1 = Libro('001', 'N1', 'Aut1', 'cat1', '1991')
+    libro2 = Libro('002', 'N2', 'Aut2', 'cat2', '1992')
+    libro3 = Libro('003', 'N3', 'Aut3', 'cat3', '1993')
+    libro4 = Libro('004', 'N4', 'Aut4', 'cat4', '1994')
+
+    reg_libros = [libro1, libro2, libro3, libro4]
+
     reg_reservas = RegistroReserva()
-    reg_reservas.add('edz', 'lib', 12, 15)
-    reg_reservas.add('edd', 'lib2', '41', '5')
-    reg_reservas.add('edd', 'lib3', '42', '7')
-    print(reg_reservas.reg_reservas)
+
+    import random
+
+    for e, l in zip(reg_estudiantes, reg_libros):
+        i = random.randrange(10)
+        j = random.randrange(10)
+        reg_reservas.add(e, l, str(i), str(j))
+
+
+
+    saveD('l', reg_libros)
+    saveD('e', reg_estudiantes)
+    saveD('r', reg_reservas)

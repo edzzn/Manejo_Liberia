@@ -33,7 +33,6 @@ class AddWindow(QtGui.QWidget):
             self.lbl_info.setText('Reserva Agregada')
             self.clear_campos()
 
-
     def clear_campos(self):
         self.txt_id_estudiante.clear()
         self.txt_nombre_libro.clear()
@@ -44,15 +43,23 @@ class AddWindow(QtGui.QWidget):
         lbl_nombre_libro = QtGui.QLabel('Libro', self)
         lbl_fecha_out = QtGui.QLabel('Fecha prestamo', self)
         lbl_fecha_in = QtGui.QLabel('Fecha retorno', self)
-        self.txt_id_estudiante = QtGui.QLineEdit(self)
+        # self.txt_id_estudiante = QtGui.QLineEdit(self)
         self.txt_nombre_libro = QtGui.QLineEdit(self)
         self.txt_fecha_out = QtGui.QLineEdit(self)
         self.txt_fecha_in = QtGui.QLineEdit(self)
 
+        lista = ['adsfadsf', 'badadsfadsfsfasd', 'asadsfdc']
+
+        self.comboList_id = QtGui.QComboBox(self)
+        self.comboList_id.clear()
+        for item in lista:
+            self.comboList_id.addItem(item)
+        self.comboList_id.move(200, 25)
+
         self.lbl_info = QtGui.QLabel(self)
 
         lbl_id_estudiante.move(50, 25)
-        self.txt_id_estudiante.move(200, 25)
+        # self.txt_id_estudiante.move(200, 25)
 
         lbl_nombre_libro.move(50, 75)
         self.txt_nombre_libro.move(200, 75)
