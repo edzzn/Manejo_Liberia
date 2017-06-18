@@ -39,8 +39,6 @@ if __name__ == '__main__':
         j = random.randrange(10)
         reg_reservas.add(e, l, str(i), str(j))
 
-
-
     saveD('l', reg_libros)
     saveD('e', reg_estudiantes)
     saveD('r', reg_reservas)

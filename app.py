@@ -9,7 +9,6 @@ Descripcion: Aplicacion sencilla de manejo de prestamo de libros
 
 import sys
 from PyQt4 import QtGui, QtCore
-from data import RegistroPrestamos, RegistroReserva
 from ui_main import MainWindow
 import data
 

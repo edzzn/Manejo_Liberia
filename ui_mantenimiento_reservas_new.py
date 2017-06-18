@@ -2,12 +2,12 @@ from PyQt4 import QtCore, QtGui
 from CoreData import RegistroReserva
 import data
 
-class AddWindow(QtGui.QWidget):
+class NewReservaWindow(QtGui.QWidget):
     """
     Ventana para agregar reservas
     """
     def __init__(self):
-        super(AddWindow, self).__init__()
+        super(NewReservaWindow, self).__init__()
 
         self.createForm()
         self.createButtons()
@@ -94,6 +94,6 @@ if __name__ == '__main__':
     import sys
 
     app = QtGui.QApplication(sys.argv)
-    mainWin = AddWindow()
+    mainWin = NewReservaWindow()
     mainWin.show()
     sys.exit(app.exec_())

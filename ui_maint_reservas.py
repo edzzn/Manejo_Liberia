@@ -1,4 +1,5 @@
 from PyQt4 import QtGui
+from ui_mantenimiento_reservas_new import NewReservaWindow
 
 # Debug only
 import inspect
@@ -44,8 +45,8 @@ class MenuMaintReservas(QtGui.QWidget):
         self.setLayout(vbox)
 
     def open_new_reserva_window(self):
-        # self.new_reserva_view = NewReserva()
-        # self.new_reserva_view.show()
+        self.new_reserva_view = NewReservaWindow()
+        self.new_reserva_view.show()
         print(inspect.stack()[0][3])
 
         self.close()
