@@ -31,7 +31,7 @@ class DeleteReservaWindow(QtGui.QWidget):
         self.txt_isbn.move(150, 60)
 
         self.lbl_info.move(150, 85)
-        self.lbl_info.resize(100,25)
+        self.lbl_info.resize(200,25)
 
     def check(self):
         estudiante_id = self.txt_id.text()

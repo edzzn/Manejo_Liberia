@@ -1,34 +1,38 @@
-from CoreData import loadD, saveD
-
-reg_reservas = loadD('r')
-reg_estudiantes = loadD('e')
-cedula = '007'
-isbn = '002'
-
-
-estudiante = reg_estudiantes.encontrar_estudiante(cedula)
-
-for estud in reg_reservas.reg_reservas:
-    if estud.id == estudiante.id:
-        print(reg_reservas.reg_reservas[estud])
-        list_reservas_estudiante = reg_reservas.reg_reservas[estud]
-        for reserva in list_reservas_estudiante:
-            print(reserva)
-            if reserva[0].isbn == isbn:
-                print(isbn)
-                list_reservas_estudiante.remove(reserva)
-        print(list_reservas_estudiante)
-        print(reg_reservas.reg_reservas)
-
-
-# from CoreData import loadD, saveD, Estudiante
+# from CoreData import loadD, saveD
 #
 # reg_reservas = loadD('r')
+# reg_estudiantes = loadD('e')
+# cedula = '001'
+# isbn = '001'
 #
-# for persona in reg_reservas.reg_reservas:
-#     print(persona)
-#     print(reg_reservas.reg_reservas[persona][0][0].isbn)
 #
+# estudiante = reg_estudiantes.encontrar_estudiante(cedula)
+#
+# for estud in reg_reservas.reg_reservas:
+#     # print(type(estud))
+#     # print(type(estudiante))
+#     if estud.id ==  estudiante.id:
+#         print(reg_reservas.reg_reservas[estud])
+#         list_reservas_estudiante = reg_reservas.reg_reservas[estud]
+#         for reserva in list_reservas_estudiante:
+#             print(reserva)
+#             if reserva[0].isbn == isbn:
+#                 print(isbn)
+#                 list_reservas_estudiante.remove(reserva)
+#         print(list_reservas_estudiante)
+#         print(reg_reservas.reg_reservas)
+# saveD('r', reg_reservas)
+
+
+from CoreData import loadD, saveD, Estudiante
+
+reg_reservas = loadD('r')
+print(reg_reservas.reg_reservas)
+
+for persona in reg_reservas.reg_reservas:
+    print(persona)
+    print(reg_reservas.reg_reservas[persona])
+
 
 
 

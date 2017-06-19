@@ -29,7 +29,7 @@ if __name__ == '__main__':
     reg_estudiantes.add(estudiante4)
 
 
-    print(reg_estudiantes.reg_estudiante[0])
+    print(type(reg_estudiantes.encontrar_estudiante('002')))
 
     #            (isbn, numPag, idioma, autor, editorial, categoria):
     libro1 = Libro('001', 'N1', 'es', 'Aut1', 'cat1', '1991')

@@ -39,7 +39,7 @@ class RegistroEstudiante():
     def encontrar_estudiante(self, estudiante_id):
         for estudiante in self.reg_estudiante:
             if estudiante.id == estudiante_id:
-                # print(True)
+                print(True)
                 return estudiante
         else:
             return None

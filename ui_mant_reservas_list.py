@@ -26,13 +26,18 @@ class ListReservasWindow(QtGui.QWidget):
         dic_reg_reservas = reg_reservas.reg_reservas
         text = 'Nombre \t ISBN \t Fch Res \t Fch \t Hora'
         for estudiante in dic_reg_reservas:
-            nombre_estudiante = estudiante.name
-            isbn_libro = dic_reg_reservas[estudiante][0][0].isbn
-            fch_out = dic_reg_reservas[estudiante][0][1]
-            fch_ret = dic_reg_reservas[estudiante][0][2]
-            hora = dic_reg_reservas[estudiante][0][3]
 
-            text = text + '\n' + nombre_estudiante + ':\t' + isbn_libro + '\t' + fch_out + '\t' + fch_ret + '\t' + hora
+            try:
+                nombre_estudiante = estudiante.name
+                isbn_libro = dic_reg_reservas[estudiante][0][0].isbn
+                fch_out = dic_reg_reservas[estudiante][0][1]
+                fch_ret = dic_reg_reservas[estudiante][0][2]
+                hora = dic_reg_reservas[estudiante][0][3]
+
+                text = text + '\n' + nombre_estudiante + ':\t' + isbn_libro + '\t' + fch_out + '\t' + fch_ret + '\t' + hora
+
+            except Exception as e:
+                pass
 
         self.textBrowser.setText(text)
 
