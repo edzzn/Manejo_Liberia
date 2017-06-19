@@ -10,7 +10,7 @@ class EditEstudianteWindow(QtGui.QWidget):
     Not DONE
     """
 
-    def __init__(self, ):
+    def __init__(self, estudiante_id):
         super(EditEstudianteWindow, self).__init__()
 
         self.createForm()

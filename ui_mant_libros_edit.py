@@ -10,7 +10,7 @@ class EditLibrosWindow(QtGui.QWidget):
     Not DONE
     """
 
-    def __init__(self, ):
+    def __init__(self, isbn):
         super(EditLibrosWindow, self).__init__()
 
         self.createForm()

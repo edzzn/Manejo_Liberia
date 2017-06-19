@@ -1,21 +1,10 @@
+import random
 from CoreData import RegistroReserva, RegistroPrestamos, saveD, loadD
 from CoreData import Estudiante, Libro, RegistroEstudiante, RegistroLibro
 from CoreData import Categoria, RegistroCategoria
 
-
-def init():
-    """
-        Permite llevar los datos de los Registros en las distintas ventanas
-    """
-    global reg_reservas
-    global reg_prestamos
-    global reg_libros
-    global reg_estudiantes
-    reg_reservas = RegistroReserva()
-    reg_prestamos = RegistroPrestamos()
-    reg_libros = []
-    reg_estudiantes = []
-
+# Archivo para pruebas permite inicializar los distintos archivos necesarios para
+# pruebas y ejecución de la aplicación
 
 if __name__ == '__main__':
     estudiante1 = Estudiante('001', 'Edisson', 'Reinozo')
@@ -60,9 +49,6 @@ if __name__ == '__main__':
     reg_reservas = RegistroReserva()
 
     reg_prestamos = RegistroPrestamos()
-
-
-    import random
 
     for i in range(4):
         b = random.randrange(10)

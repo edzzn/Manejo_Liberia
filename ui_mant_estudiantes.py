@@ -2,6 +2,7 @@ from PyQt4 import QtGui
 from ui_mant_reservas_new import NewReservaWindow
 from ui_mant_estudiantes_new import NewEstudianteWindow
 from ui_mant_estudiantes_edit import EditEstudianteWindow
+from ui_mant_estudiantes_id_edit import GetIdEditWindow
 
 # Debug only
 import inspect
@@ -54,7 +55,7 @@ class MenuEstudiantes(QtGui.QWidget):
         self.close()
 
     def open_edit_estudiante_window(self):
-        self.edit_estudiante_view = EditEstudianteWindow()
+        self.edit_estudiante_view = GetIdEditWindow()
         self.edit_estudiante_view.show()
         print(inspect.stack()[0][3])
 

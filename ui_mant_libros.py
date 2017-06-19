@@ -1,6 +1,7 @@
 from PyQt4 import QtGui
 from ui_mant_libros_new import NewLibrosWindow
 from ui_mant_libros_edit import EditLibrosWindow
+from ui_mant_libros_id_edit import GetIdEditWindow
 
 # Debug only
 import inspect
@@ -53,7 +54,7 @@ class MenuLibros(QtGui.QWidget):
         self.close()
 
     def open_edit_libros_window(self):
-        self.edit_libros_view = EditLibrosWindow()
+        self.edit_libros_view = GetIdEditWindow()
         self.edit_libros_view.show()
         print(inspect.stack()[0][3])
 

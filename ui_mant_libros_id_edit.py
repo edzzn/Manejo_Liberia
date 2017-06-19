@@ -1,6 +1,6 @@
 from PyQt4 import QtCore, QtGui
-from CoreData import validateEstudiante, validateLibro, loadD
-from ui_mant_categorias_edit import EditCategoriaWindow
+from CoreData import validateEstudiante, validateLibro
+from ui_mant_libros_edit import EditLibrosWindow
 
 
 class GetIdEditWindow(QtGui.QWidget):
@@ -11,11 +11,11 @@ class GetIdEditWindow(QtGui.QWidget):
         self.createButtons()
 
         self.setWindowIcon(QtGui.QIcon('images/edit.png'))
-        self.setWindowTitle("Editar una Categoria")
-        self.setGeometry(650, 300, 350, 130)
+        self.setWindowTitle("Edita un libro")
+        self.setGeometry(650, 300, 350, 175 )
 
     def createForm(self):
-        lbl_id = QtGui.QLabel('Código', self)
+        lbl_id = QtGui.QLabel('ISBN', self)
         self.txt_id = QtGui.QLineEdit(self)
 
         self.lbl_info = QtGui.QLabel('', self)
@@ -23,26 +23,20 @@ class GetIdEditWindow(QtGui.QWidget):
         lbl_id.move(50, 25)
         self.txt_id.move(150, 25)
 
-        self.lbl_info.move(150, 55)
-        self.lbl_info.resize(200,25)
+
+        self.lbl_info.move(150, 85)
+        self.lbl_info.resize(100,25)
 
     def check(self):
-        codigo = self.txt_id.text()
-
-        reg_categoria = loadD('c')
-
-        if codigo == '':
+        estudiante_id = self.txt_id.text()
+        if estudiante_id == '':
             self.lbl_info.setText('Datos incorrectos')
-
-        elif reg_categoria.encontrar_categoria(codigo) is None:
-            self.lbl_info.setText('Categoria no Registada')
-
         else:
             self.open_edit_window()
 
     def open_edit_window(self):
-        codigo = self.txt_id.text()
-        self.edit_view = EditCategoriaWindow(codigo)
+        estudiante_id = self.txt_id.text()
+        self.edit_view = EditLibrosWindow(estudiante_id)
         self.edit_view.show()
         self.close()
 

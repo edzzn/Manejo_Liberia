@@ -1,7 +1,6 @@
 from PyQt4 import QtGui
-from ui_mant_categorias_edit import EditCategoriaWindow
 from ui_mant_categorias_new import NewCategoriaWindow
-
+from ui_mant_categorias_id_edit import GetIdEditWindow
 
 # Debug only
 import inspect
@@ -54,8 +53,8 @@ class MenuCategorias(QtGui.QWidget):
         self.close()
 
     def open_edit_categoria_window(self):
-        self.new_categoria_view = EditCategoriaWindow()
-        self.new_categoria_view.show()
+        self.edit_categoria_view = GetIdEditWindow()
+        self.edit_categoria_view.show()
         print(inspect.stack()[0][3])
 
         self.close()
