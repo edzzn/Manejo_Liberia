@@ -4,6 +4,7 @@ from ui_mant_reservas import MenuMaintReservas
 from ui_mant_libros import MenuLibros
 from ui_mant_estudiantes import MenuEstudiantes
 from ui_mant_categorias import MenuCategorias
+from ui_mant_prestamo import MenuPrestamo
 from CoreData import saveD, loadD
 
 # for test Only
@@ -50,6 +51,11 @@ class MainWindow(QtGui.QMainWindow):
         self.maint_reservas_view.show()
         print(inspect.stack()[0][3])
 
+    def open_mantenimiento_prestamo_window(self):
+        self.maint_prestamo_view = MenuPrestamo()
+        self.maint_prestamo_view.show()
+        print(inspect.stack()[0][3])
+
     def about(self):
         QtGui.QMessageBox.about(self, "Acerca de **** - Sistema de Gestion de Prestamos de Libros",
                 "<b>*****</b> es una aplicacion realizada por <b>----</b>."  )
@@ -79,6 +85,12 @@ class MainWindow(QtGui.QMainWindow):
                                            statusTip="Mantenimiento Registro Reservas",
                                             triggered=self.open_mantenimiento_reserva_window)
 
+        self.maintPrestamoAct = QtGui.QAction(QtGui.QIcon('images/user-plus.png'),
+                "&Mantenimiento Prestamo", self,
+                                            # shortcut=QtGui.QKeySequence.New,
+                                           statusTip="Mantenimiento Registro Prestamo",
+                                            triggered=self.open_mantenimiento_prestamo_window)
+
         # self.maintCategoriasAct = QtGui.QAction(QtGui.QIcon('images/user-plus.png'),
         #         "&Mantenimiento Libros", self,
         #                                     # shortcut=QtGui.QKeySequence.New,
@@ -98,6 +110,7 @@ class MainWindow(QtGui.QMainWindow):
         self.maintenanceMenu.addAction(self.maintEstudiantesAct)
         self.maintenanceMenu.addAction(self.maintCategoriasAct)
         self.maintenanceMenu.addAction(self.maintReservasAct)
+        self.maintenanceMenu.addAction(self.maintPrestamoAct)
 
         self.helpMenu = self.menuBar().addMenu("&Ayuda")
         self.helpMenu.addAction(self.aboutAct)
@@ -111,6 +124,7 @@ class MainWindow(QtGui.QMainWindow):
         self.fileToolBar.addAction(self.maintEstudiantesAct)
         self.fileToolBar.addAction(self.maintCategoriasAct)
         self.fileToolBar.addAction(self.maintReservasAct)
+        self.fileToolBar.addAction(self.maintPrestamoAct)
 
 
 
