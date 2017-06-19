@@ -37,7 +37,7 @@ class EditReservaWindow(QtGui.QWidget):
         elif not validateLibro(libro_isbn):
             self.lbl_info.setText('Libro no Registado')
         else:
-            # Agregar la reserva
+            # Editar la reserva
             reg_estudiantes = loadD('e')
             estudiante = reg_estudiantes.encontrar_estudiante(id_estudiante)
 

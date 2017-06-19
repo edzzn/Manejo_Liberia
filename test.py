@@ -1,3 +1,15 @@
+# from pprint import pprint as pp
+# from CoreData import loadD, saveD
+#
+# reg_r = loadD('r')
+# for persona in reg_r.reg_reservas:
+#     pp(persona)
+#     pp(reg_r.reg_reservas[persona])
+#     for reserva in reg_r.reg_reservas[persona]:
+#         pp(reserva)
+#         if pp =
+#     pp('')
+
 # from CoreData import loadD, saveD
 #
 # reg_reservas = loadD('r')
@@ -23,16 +35,16 @@
 #         print(reg_reservas.reg_reservas)
 # saveD('r', reg_reservas)
 
-
-from CoreData import loadD, saveD, Estudiante
-
-reg_reservas = loadD('r')
-print(reg_reservas.reg_reservas)
-
-for persona in reg_reservas.reg_reservas:
-    print(persona)
-    print(reg_reservas.reg_reservas[persona])
-
+#
+# from CoreData import loadD, saveD, Estudiante
+#
+# reg_reservas = loadD('r')
+# print(reg_reservas.reg_reservas)
+#
+# for persona in reg_reservas.reg_reservas:
+#     print(persona)
+#     print(reg_reservas.reg_reservas[persona])
+#
 
 
 

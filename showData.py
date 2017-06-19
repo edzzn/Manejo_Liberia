@@ -16,6 +16,7 @@ def showEstudiantes():
 
 def showCategoria():
     pp([l.codigo for l in reg_categorias.registro_categoria])
+    pp([l.descripcion for l in reg_categorias.registro_categoria])
 
 def showReserva():
     pp(reg_reservas.reg_reservas)

@@ -10,15 +10,16 @@ class EditCategoriaWindow(QtGui.QWidget):
     Not DONE
     """
 
-    def __init__(self, ):
+    def __init__(self, codigo):
         super(EditCategoriaWindow, self).__init__()
 
+        self.codigo = codigo
         self.createForm()
         self.createButtons()
 
         self.setWindowIcon(QtGui.QIcon('images/user-plus.png'))
         self.setWindowTitle("Editar una categoria")
-        self.setGeometry(650, 300, 400, 330)
+        self.setGeometry(650, 300, 400, 200)
 
     def addEstudiante(self):
 
@@ -29,39 +30,36 @@ class EditCategoriaWindow(QtGui.QWidget):
         if codigo == '' or descripcion== '':
             self.lbl_info.setText('Datos incorrectos')
 
-        # elif id_estudiante in data.reg_estudiantes:
-        #     self.lbl_info.setText('Datos duplicados')
         else:
-            data.reg_categoria.add(codigo, descripcion)
+            # Agregar un Categoria
+            reg_categorias = loadD('c')
+            for cat in reg_cat.registro_categoria:
+                if cat.codigo == codigo:
+                    cat.edit(descripcion)
 
+            saveD('c', reg_categorias)
 
-            self.lbl_info.setText('Reserva Modificada')
+            self.lbl_info.setText('Categoria Editada')
             self.clear_campos()
+
 
     def clear_campos(self):
         self.txt_codigo.clear()
         self.txt_descripcion.clear()
 
-
     def update_campos(self):
-        reg_categoria = loadD('r')
-        reg_categoria = reg_categoria.reg_categoria
-        item = reg_categoria.popitem()
-        categoria = item[0]
-        reg_categoria = item[1]
-        print(reg_categoria)
-        print(reg_categoria[0])
-        codigo, descripcion= reg_categoria[0]
-        self.txt_codigo.setText(categoria.get_isbn)
-        self.txt_descripcion.setText(categoria.get_descripcion)
+        reg_categoria = loadD('c')
+        categoria = reg_categoria.encontrar_categoria(self.codigo)
 
+        self.txt_codigo.setText(self.codigo)
+        self.txt_descripcion.setText(categoria.descripcion)
 
     def createForm(self):
 
         lbl_codigo = QtGui.QLabel('Código', self)
         lbl_descripcion = QtGui.QLabel('Descipción', self)
         self.txt_codigo = QtGui.QLineEdit(self)
-        self.txt_descipcion = QtGui.QLineEdit(self)
+        self.txt_descripcion = QtGui.QLineEdit(self)
 
         self.lbl_info = QtGui.QLabel(self)
 
@@ -98,6 +96,6 @@ if __name__ == '__main__':
     import sys
 
     app = QtGui.QApplication(sys.argv)
-    mainWin = EditCategoriaWindow()
+    mainWin = EditCategoriaWindow('012')
     mainWin.show()
     sys.exit(app.exec_())
