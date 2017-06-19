@@ -1,6 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from CoreData import Categoria
-import data
+from CoreData import Categoria, loadD, saveD
 
 class NewCategoriaWindow(QtGui.QWidget):
     """
@@ -14,21 +13,29 @@ class NewCategoriaWindow(QtGui.QWidget):
 
         self.setWindowIcon(QtGui.QIcon('images/user-plus.png'))
         self.setWindowTitle("Agrega una Categoria")
-        self.setGeometry(650, 300, 400, 330)
+        self.setGeometry(650, 300, 400, 200)
 
     def addEstudiante(self):
 
         codigo = str(self.txt_codigo.text())
         descripcion = str(self.txt_descripcion.text())
 
+        reg_categorias = loadD('c')
 
         if codigo == '' or descripcion == '' :
             self.lbl_info.setText('Datos incorrectos')
 
-        # elif id_estudiante in data.reg_estudiantes:
-        #     self.lbl_info.setText('Datos duplicados')
+        elif reg_categorias.encontrar_categoria(codigo) is not None:
+            self.lbl_info.setText('Datos duplicados')
+
         else:
-            data.reg_categorias.add(codigo, descripcion)
+            # Agregar un Categoria
+            categoria = Categoria(codigo, descripcion)
+
+            reg_categorias.add(categoria)
+
+            saveD('c', reg_categorias)
+
             self.lbl_info.setText('Categoria Agregada')
             self.clear_campos()
 
@@ -53,7 +60,7 @@ class NewCategoriaWindow(QtGui.QWidget):
         lbl_descripcion.move(50, 75)
         self.txt_descripcion.move(200, 75)
 
-        self.lbl_info.move(200, 220)
+        self.lbl_info.move(200, 120)
         self.lbl_info.resize(200, 20)
 
     def createButtons(self):

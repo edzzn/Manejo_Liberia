@@ -123,8 +123,8 @@ class RegistroCategoria():
     def __init__(self):
         self.registro_categoria = []
 
-    def add(self, Categoria):
-        self.registro_categoria.append(Categoria)
+    def add(self, categoria):
+        self.registro_categoria.append(categoria)
 
     def mostrar(self):
         for categoria in self.registro_categoria:
@@ -132,15 +132,15 @@ class RegistroCategoria():
 
     def edit_categoria(self, categoria_codigo, categoria):
         position_list = self.get_categoria_loc(categoria_codigo)
-        self.__registro_categoria[position_list] = categoria
+        self.registro_categoria[position_list] = categoria
 
     def delete_categoria(self, categoria_codigo):
         position_list = self.get_categoria_loc(categoria_codigo)
-        del self.__registro_categoria[position_list]
+        del self.registro_categoria[position_list]
 
     def encontrar_categoria(self, categoria_codigo):
-        for categoria in self.__registro_categoria:
-            if categoria.get_codigo() == categoria_codigo:
+        for categoria in self.registro_categoria:
+            if categoria.codigo == categoria_codigo:
                 return categoria
         else:
             return None

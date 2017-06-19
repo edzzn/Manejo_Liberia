@@ -11,16 +11,17 @@ def showLibros():
     pp([l.isbn for l in reg_libros.reg_libro])
 
 def showEstudiantes():
-    pp(reg_estudiantes.reg_estudiante)
+    pp([l.id for l in reg_estudiantes.reg_estudiante])
+
 
 def showCategoria():
-    pp(reg_libros.reg_libro)
+    pp([l.codigo for l in reg_categorias.registro_categoria])
 
 def showReserva():
     pp(reg_reservas.reg_reservas)
 
 
 
-showLibros()
+showCategoria()
 
 # showReserva()

@@ -26,12 +26,17 @@ class NewLibrosWindow(QtGui.QWidget):
         categoria=str(self.txt_categoria.text())
 
         reg_libros = loadD('l')
+        reg_categorias = loadD('c')
 
         if isbn == '' or numPag == '' or idioma == '' or autor == '' or editorial == '' or categoria == '':
             self.lbl_info.setText('Datos incorrectos')
 
         elif reg_libros.encontrar_libro(isbn) is not None:
             self.lbl_info.setText('Datos duplicados')
+
+        #     Verficamos que la cat este registrada
+        elif reg_categorias.encontrar_categoria(categoria) is None:
+            self.lbl_info.setText('Categoria no registrada')
 
         else:
             # Agregar un Libro
@@ -41,7 +46,7 @@ class NewLibrosWindow(QtGui.QWidget):
 
             saveD('l', reg_libros)
 
-            self.lbl_info.setText('Reserva Agregada')
+            self.lbl_info.setText('Libro Agregado')
             self.clear_campos()
 
 

@@ -1,6 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from CoreData import Estudiante
-import data
+from CoreData import Estudiante, loadD, saveD
 
 class NewEstudianteWindow(QtGui.QWidget):
     """
@@ -14,7 +13,7 @@ class NewEstudianteWindow(QtGui.QWidget):
 
         self.setWindowIcon(QtGui.QIcon('images/user-plus.png'))
         self.setWindowTitle("Agrega un estudiante")
-        self.setGeometry(650, 300, 400, 330)
+        self.setGeometry(650, 300, 400, 230)
 
     def addEstudiante(self):
 
@@ -22,15 +21,23 @@ class NewEstudianteWindow(QtGui.QWidget):
         nombre = str(self.txt_nombre.text())
         apellido = str(self.txt_apellido.text())
 
+        reg_estudiantes = loadD('e')
 
         if id_estudiante == '' or nombre == '' or apellido == '':
             self.lbl_info.setText('Datos incorrectos')
 
-        # elif id_estudiante in data.reg_estudiantes:
-        #     self.lbl_info.setText('Datos duplicados')
+        elif reg_estudiantes.encontrar_estudiante(id_estudiante) is not None:
+            self.lbl_info.setText('Datos duplicados')
+
         else:
-            data.reg_estuantes.add(id_estudiante, nombre, apellido)
-            self.lbl_info.setText('Reserva Agregada')
+            # Agregar un Libro
+            estudiante = Estudiante(id_estudiante, nombre, apellido)
+
+            reg_estudiantes.add(estudiante)
+
+            saveD('e', reg_estudiantes)
+
+            self.lbl_info.setText('Estudiante Agregado')
             self.clear_campos()
 
 
@@ -61,7 +68,7 @@ class NewEstudianteWindow(QtGui.QWidget):
         lbl_apellido.move(50, 125)
         self.txt_apellido.move(200, 125)
 
-        self.lbl_info.move(200, 220)
+        self.lbl_info.move(200, 160)
         self.lbl_info.resize(200, 20)
 
     def createButtons(self):
