@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from CoreData import RegistroReserva
+from CoreData import loadD, saveD, Libro
 import data
 
 class NewLibrosWindow(QtGui.QWidget):
@@ -14,24 +14,33 @@ class NewLibrosWindow(QtGui.QWidget):
 
         self.setWindowIcon(QtGui.QIcon('images/user-plus.png'))
         self.setWindowTitle("Agrega un libro")
-        self.setGeometry(650, 300, 400, 330)
+        self.setGeometry(650, 300, 400, 400)
 
-    def addEstudiante(self):
+    def addLibro(self):
 
         isbn = str(self.txt_isbn.text())
         numPag = str(self.txt_numPag.text())
-        idioma = str(self.dioma.text())
+        idioma = str(self.txt_idioma.text())
         autor = str(self.txt_autor.text())
         editorial=str(self.txt_editorial.text())
         categoria=str(self.txt_categoria.text())
 
+        reg_libros = loadD('l')
+
         if isbn == '' or numPag == '' or idioma == '' or autor == '' or editorial == '' or categoria == '':
             self.lbl_info.setText('Datos incorrectos')
 
-        # elif id_estudiante in data.reg_estudiantes:
-        #     self.lbl_info.setText('Datos duplicados')
+        elif reg_libros.encontrar_libro(isbn) is not None:
+            self.lbl_info.setText('Datos duplicados')
+
         else:
-            data.reg_libros.add(isbn, numPag, idioma, autor, editorial, categoria)
+            # Agregar un Libro
+            libro = Libro(isbn, numPag, idioma, editorial, categoria)
+
+            reg_libros.add(libro)
+
+            saveD('r', reg_libros)
+
             self.lbl_info.setText('Reserva Agregada')
             self.clear_campos()
 
@@ -78,12 +87,12 @@ class NewLibrosWindow(QtGui.QWidget):
         lbl_categoria.move(50, 275)
         self.txt_categoria.move(200, 275)
 
-        self.lbl_info.move(200, 220)
+        self.lbl_info.move(200, 320)
         self.lbl_info.resize(200, 20)
 
     def createButtons(self):
         okBtn = QtGui.QPushButton('OK')
-        okBtn.clicked.connect(self.addEstudiante)
+        okBtn.clicked.connect(self.addLibro)
         cancelBtn = QtGui.QPushButton('Cancelar')
         cancelBtn.clicked.connect(self.close)
         hbox = QtGui.QHBoxLayout()

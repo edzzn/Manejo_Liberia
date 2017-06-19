@@ -33,6 +33,8 @@ class EditCategoriaWindow(QtGui.QWidget):
         #     self.lbl_info.setText('Datos duplicados')
         else:
             data.reg_categoria.add(codigo, descripcion)
+
+
             self.lbl_info.setText('Reserva Modificada')
             self.clear_campos()
 

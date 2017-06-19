@@ -1,5 +1,6 @@
 from CoreData import RegistroReserva, RegistroPrestamos, saveD, loadD
 from CoreData import Estudiante, Libro, RegistroEstudiante, RegistroLibro
+from CoreData import Categoria, RegistroCategoria
 
 
 def init():
@@ -31,6 +32,19 @@ if __name__ == '__main__':
 
     print(type(reg_estudiantes.encontrar_estudiante('002')))
 
+
+
+    cat1 = Categoria('011', 'Cat1')
+    cat2 = Categoria('022', 'Cat2')
+    cat3 = Categoria('033', 'Cat3')
+    cat4 = Categoria('044', 'Cat4')
+
+    reg_categoria = RegistroCategoria()
+    reg_categoria.add(cat1)
+    reg_categoria.add(cat2)
+    reg_categoria.add(cat3)
+    reg_categoria.add(cat4)
+
     #            (isbn, numPag, idioma, autor, editorial, categoria):
     libro1 = Libro('001', 'N1', 'es', 'Aut1', 'cat1', '1991')
     libro2 = Libro('002', 'N2', 'es', 'Aut2', 'cat2', '1992')
@@ -45,6 +59,8 @@ if __name__ == '__main__':
 
     reg_reservas = RegistroReserva()
 
+    reg_prestamos = RegistroPrestamos()
+
 
     import random
 
@@ -52,7 +68,10 @@ if __name__ == '__main__':
         b = random.randrange(10)
         j = random.randrange(10)
         reg_reservas.add(reg_estudiantes.reg_estudiante[i], reg_libros.reg_libro[i], str(b), str(j), str(i+j))
+        reg_prestamos.add(reg_estudiantes.reg_estudiante[i], reg_libros.reg_libro[i], str(b), str(j), str(i+j))
 
     saveD('l', reg_libros)
     saveD('e', reg_estudiantes)
     saveD('r', reg_reservas)
+    saveD('c', reg_categoria)
+    saveD('p', reg_prestamos)

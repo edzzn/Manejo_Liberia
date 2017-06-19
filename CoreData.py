@@ -235,7 +235,7 @@ class RegistroPrestamos():
         for key in self.reg_reservas:
             print(key + ": " + str(self.reg_reservas[key]))
 
-    def eliminar(self, estudiante ):
+    def eliminar(self, estudiante):
         del self.reg_reservas[estudiante]
 
 
