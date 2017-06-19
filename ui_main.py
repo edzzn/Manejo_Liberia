@@ -20,7 +20,7 @@ class MainWindow(QtGui.QMainWindow):
         self.create_menus()
         self.create_toolBars()
         self.create_statusBar()
-        self.create_list_prestamos()
+        # self.create_list_prestamos()
 
         # self.setWindowIcon(QtGui.QIcon('images/logo.png'))
         self.setWindowTitle('Gestión Biblioteca')
@@ -89,11 +89,6 @@ class MainWindow(QtGui.QMainWindow):
                                       "Acerca de", self,
                                       statusTip = "Acerca de  ****",
                                       triggered= self.about)
-        self.refreshBox = QtGui.QAction(QtGui.QIcon('images/info.png'),
-                                      "Refrescar", self,
-                                      statusTip = "Actualizar Resrevas",
-                                      triggered= self.create_list_prestamos)
-
 
     def create_menus(self):
         self.fileMenu = self.menuBar().addMenu("&Archivo")
@@ -106,7 +101,6 @@ class MainWindow(QtGui.QMainWindow):
 
         self.helpMenu = self.menuBar().addMenu("&Ayuda")
         self.helpMenu.addAction(self.aboutAct)
-        self.helpMenu.addAction(self.refreshBox)
 
     def create_statusBar(self):
         self.statusBar().showMessage("Ready")
@@ -118,27 +112,6 @@ class MainWindow(QtGui.QMainWindow):
         self.fileToolBar.addAction(self.maintCategoriasAct)
         self.fileToolBar.addAction(self.maintReservasAct)
 
-    def create_list_prestamos(self):
-        lbl_registro = QtGui.QLabel('Reservas:', self)
-        self.textBrowser = QtGui.QTextBrowser(self)
-
-        lbl_registro.move(50, 65)
-        self.textBrowser.move(50, 100)
-        self.textBrowser.resize(300,150)
-
-        reg_reservas = loadD('r')
-        dic_reg_reservas = reg_reservas.reg_reservas
-        text = ''
-        for estudiante in dic_reg_reservas:
-            nombre_estudiante = estudiante.name
-            isbn_libro = dic_reg_reservas[estudiante][0][0].isbn
-            fch_out = dic_reg_reservas[estudiante][0][1]
-            fch_ret = dic_reg_reservas[estudiante][0][2]
-
-
-            text = text + '\n' + nombre_estudiante + ' isbn:' + isbn_libro  + ' : ' + fch_out + ' - ' + fch_ret
-
-        self.textBrowser.setText(text)
 
 
 if __name__ == '__main__':

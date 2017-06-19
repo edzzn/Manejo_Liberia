@@ -39,7 +39,7 @@ class RegistroEstudiante():
     def encontrar_estudiante(self, estudiante_id):
         for estudiante in self.reg_estudiante:
             if estudiante.id == estudiante_id:
-                print(True)
+                # print(True)
                 return estudiante
         else:
             return None
@@ -171,8 +171,20 @@ class RegistroReserva():
         for key in self.reg_reservas:
             print(key + ": " +str(self.reg_reservas[key]))
 
-    def eliminar(self, estudiante,):
-        del self.reg_reservas[estudiante]
+    def eliminar(self, estudiante, isbn):
+        """
+        Elimina un registro, dado un objeto estudiante y un isbn
+        Este metodo no valida.
+        :param estudiante_id: 
+        :return: 
+        """
+        registro = self.reg_reservas[estudiante]
+        for reserva in registro:
+            print(reserva)
+            if reserva[0].isbn == isbn:
+                print(isbn)
+                self.reg_reservas[estudiante].remove(reserva)
+
 
     def encontrar_registro(self, estudiante):
         if estudiante in self.reg_reservas:
