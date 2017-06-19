@@ -35,11 +35,11 @@ class NewLibrosWindow(QtGui.QWidget):
 
         else:
             # Agregar un Libro
-            libro = Libro(isbn, numPag, idioma, editorial, categoria)
+            libro = Libro(isbn, numPag, idioma, autor, editorial, categoria)
 
             reg_libros.add(libro)
 
-            saveD('r', reg_libros)
+            saveD('l', reg_libros)
 
             self.lbl_info.setText('Reserva Agregada')
             self.clear_campos()
