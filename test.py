@@ -24,8 +24,12 @@ reg_estudiantes.add(estudiante4)
 
 reg_reservas = loadD('r').reg_reservas
 
-for reserva in reg_reservas:
-    print(reserva)
+print("Reservas")
+for persona in reg_reservas:
+    # print(reserva)
+    print(reg_reservas[persona][0][0].isbn)
+    print(persona.id)
+    print('--')
 
 
 # saveD('r', 'hola')

@@ -1,5 +1,6 @@
 from PyQt4 import QtGui
 from ui_mant_reservas_new import NewReservaWindow
+from ui_mant_reservas_id_edit import GetIdEditWindow
 
 # Debug only
 import inspect
@@ -25,7 +26,7 @@ class MenuMaintReservas(QtGui.QWidget):
         btn_new_reserva.clicked.connect(self.open_new_reserva_window)
 
         btn_edit_reserva = QtGui.QPushButton('Editar')
-        btn_edit_reserva.clicked.connect(self.close)
+        btn_edit_reserva.clicked.connect(self.open_edit_reserva_window)
 
         btn_list_reserva = QtGui.QPushButton('Listar')
         btn_list_reserva.clicked.connect(self.close)
@@ -52,8 +53,8 @@ class MenuMaintReservas(QtGui.QWidget):
         self.close()
 
     def open_edit_reserva_window(self):
-        # self.edit_reserva_view = EditReserva()
-        # self.edit_reserva_view.show()
+        self.edit_reserva_view = GetIdEditWindow()
+        self.edit_reserva_view.show()
         print(inspect.stack()[0][3])
 
         self.close()

@@ -180,6 +180,24 @@ class RegistroReserva():
         else:
             return None
 
+    def registro_id_isbn(self, id_estudiante, isbn):
+        reg_estudiantes = loadD("e")
+        reg_reservas = loadD("r")
+
+        for estudiante in reg_estudiantes.reg_estudiante:
+            if estudiante.id == id_estudiante:
+                for estudiante in reg_reservas.reg_reservas:
+                    # print(reg_reservas.reg_reservas[estudiante])
+
+                    # vemos cada reserva de cada usuario
+                    for reserva in reg_reservas.reg_reservas[estudiante]:
+                        # print(reserva)
+                        # print(reserva[0].isbn)
+                        if reserva[0].isbn == isbn:
+                            return estudiante, reserva
+        else:
+            return None
+
 class RegistroPrestamos():
 
     def __init__(self):
