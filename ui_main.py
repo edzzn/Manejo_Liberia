@@ -6,6 +6,7 @@ from ui_mant_estudiantes import MenuEstudiantes
 from ui_mant_categorias import MenuCategorias
 from ui_mant_prestamo import MenuPrestamo
 from CoreData import saveD, loadD
+from ui_mant_prestamo_list import ListPrestamosWindow
 
 # for test Only
 import inspect
@@ -56,12 +57,17 @@ class MainWindow(QtGui.QMainWindow):
         self.maint_prestamo_view.show()
         print(inspect.stack()[0][3])
 
+    def open_mantenimiento_prestamo_list_window(self):
+        self.maint_prestamo_list_view = ListPrestamosWindow()
+        self.maint_prestamo_list_view.show()
+        print(inspect.stack()[0][3])
+
     def about(self):
         QtGui.QMessageBox.about(self, "Acerca de **** - Sistema de Gestion de Prestamos de Libros",
                 "<b>*****</b> es una aplicacion realizada por <b>----</b>."  )
 
     def create_actions(self):
-        self.maintLibrosAct = QtGui.QAction(QtGui.QIcon('images/user-plus.png'),
+        self.maintLibrosAct = QtGui.QAction(QtGui.QIcon('images/book.png'),
                 "&Mantenimiento Libros", self,
                                             # shortcut=QtGui.QKeySequence.New,
                                            statusTip="Mantenimiento Registro Libros",
@@ -90,6 +96,12 @@ class MainWindow(QtGui.QMainWindow):
                                             # shortcut=QtGui.QKeySequence.New,
                                            statusTip="Mantenimiento Registro Prestamo",
                                             triggered=self.open_mantenimiento_prestamo_window)
+
+        self.maintPrestamoListAct = QtGui.QAction(QtGui.QIcon('images/th-list.png'),
+                "&Listar Prestamos", self,
+                                            # shortcut=QtGui.QKeySequence.New,
+                                           statusTip="Lista los prestamos",
+                                            triggered=self.open_mantenimiento_prestamo_list_window)
 
         # self.maintCategoriasAct = QtGui.QAction(QtGui.QIcon('images/user-plus.png'),
         #         "&Mantenimiento Libros", self,
@@ -122,9 +134,10 @@ class MainWindow(QtGui.QMainWindow):
         self.fileToolBar = self.addToolBar("Archivo")
         self.fileToolBar.addAction(self.maintLibrosAct)
         self.fileToolBar.addAction(self.maintEstudiantesAct)
-        self.fileToolBar.addAction(self.maintCategoriasAct)
-        self.fileToolBar.addAction(self.maintReservasAct)
+        # self.fileToolBar.addAction(self.maintCategoriasAct)
+        # self.fileToolBar.addAction(self.maintReservasAct)
         self.fileToolBar.addAction(self.maintPrestamoAct)
+        self.fileToolBar.addAction(self.maintPrestamoListAct)
 
 
 

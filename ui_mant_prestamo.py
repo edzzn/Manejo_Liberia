@@ -13,9 +13,9 @@ class MenuPrestamo(QtGui.QWidget):
 
         self.setWindowIcon(QtGui.QIcon('images/user-plus.png'))
         self.setWindowTitle("Agrega una Reserva")
-        self.setGeometry(650, 300, 400, 330)
+        self.setGeometry(650, 300, 400, 300)
 
-    def addReserva(self):
+    def addPrestamo(self):
 
         id_estudiante = str(self.txt_id_estudiante.text())
         libro_isbn = str(self.txt_nombre_libro.text())
@@ -39,13 +39,13 @@ class MenuPrestamo(QtGui.QWidget):
 
             libro = reg_libro.encontrar_libro(libro_isbn)
 
-            reg_reservas = loadD('r')
+            reg_prestamos = loadD('p')
 
-            reg_reservas.add(estudiante, libro, fch_reserva, hora_reserva)
+            reg_prestamos.add(estudiante, libro, fch_reserva, fch_reserva, hora_reserva)
 
-            saveD('r', reg_reservas)
+            saveD('p', reg_prestamos)
 
-            self.lbl_info.setText('Reserva Agregada')
+            self.lbl_info.setText('Prestamo Agregado')
             self.clear_campos()
 
 
@@ -58,8 +58,8 @@ class MenuPrestamo(QtGui.QWidget):
     def createForm(self):
         lbl_id_estudiante = QtGui.QLabel('Id Estudiante', self)
         lbl_nombre_libro = QtGui.QLabel('Libro', self)
-        lbl_fch_reserva = QtGui.QLabel('Fecha de reserva', self)
-        lbl_hora_reserva = QtGui.QLabel('Hora de reserva', self)
+        lbl_fch_reserva = QtGui.QLabel('Fecha de prestamo', self)
+        lbl_hora_reserva = QtGui.QLabel('Hora de prestamo', self)
         self.txt_id_estudiante = QtGui.QLineEdit(self)
         self.txt_nombre_libro = QtGui.QLineEdit(self)
         self.txt_fch_reserva = QtGui.QLineEdit(self)
@@ -79,12 +79,12 @@ class MenuPrestamo(QtGui.QWidget):
         lbl_hora_reserva.move(50, 175)
         self.txt_hora_reserva.move(200, 175)
 
-        self.lbl_info.move(200, 255)
+        self.lbl_info.move(200, 220)
         self.lbl_info.resize(200, 20)
 
     def createButtons(self):
         okBtn = QtGui.QPushButton('OK')
-        okBtn.clicked.connect(self.addReserva)
+        okBtn.clicked.connect(self.addPrestamo)
         cancelBtn = QtGui.QPushButton('Cancelar')
         cancelBtn.clicked.connect(self.close)
         hbox = QtGui.QHBoxLayout()
