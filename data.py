@@ -1,4 +1,5 @@
-from CoreData import RegistroReserva, RegistroPrestamos, saveD, loadD, Estudiante, Libro
+from CoreData import RegistroReserva, RegistroPrestamos, saveD, loadD
+from CoreData import Estudiante, Libro, RegistroEstudiante, RegistroLibro
 
 
 def init():
@@ -21,7 +22,14 @@ if __name__ == '__main__':
     estudiante3 = Estudiante('003', 'Edi', 'Rei')
     estudiante4 = Estudiante('004', 'Ed', 'R')
 
-    reg_estudiantes = [estudiante1, estudiante2, estudiante3, estudiante4]
+    reg_estudiantes = RegistroEstudiante()
+    reg_estudiantes.add(estudiante1)
+    reg_estudiantes.add(estudiante2)
+    reg_estudiantes.add(estudiante3)
+    reg_estudiantes.add(estudiante4)
+
+
+    print(reg_estudiantes.reg_estudiante[0])
 
     #            (isbn, numPag, idioma, autor, editorial, categoria):
     libro1 = Libro('001', 'N1', 'es', 'Aut1', 'cat1', '1991')
@@ -29,16 +37,21 @@ if __name__ == '__main__':
     libro3 = Libro('003', 'N3', 'es', 'Aut3', 'cat3', '1993')
     libro4 = Libro('004', 'N4', 'es', 'Aut4', 'cat4', '1994')
 
-    reg_libros = [libro1, libro2, libro3, libro4]
+    reg_libros = RegistroLibro()
+    reg_libros.add(libro1)
+    reg_libros.add(libro2)
+    reg_libros.add(libro3)
+    reg_libros.add(libro4)
 
     reg_reservas = RegistroReserva()
 
+
     import random
 
-    for e, l in zip(reg_estudiantes, reg_libros):
-        i = random.randrange(10)
+    for i in range(4):
+        b = random.randrange(10)
         j = random.randrange(10)
-        reg_reservas.add(e, l, str(i), str(j), str(i+j))
+        reg_reservas.add(reg_estudiantes.reg_estudiante[i], reg_libros.reg_libro[i], str(b), str(j), str(i+j))
 
     saveD('l', reg_libros)
     saveD('e', reg_estudiantes)

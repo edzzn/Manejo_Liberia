@@ -1,6 +1,5 @@
 from PyQt4 import QtCore, QtGui
-from CoreData import RegistroReserva
-import data
+from CoreData import validateLibro, validateEstudiante, loadD, saveD, RegistroEstudiante, RegistroLibro
 
 class NewReservaWindow(QtGui.QWidget):
     """
@@ -16,21 +15,37 @@ class NewReservaWindow(QtGui.QWidget):
         self.setWindowTitle("Agrega una Reserva")
         self.setGeometry(650, 300, 400, 330)
 
-    def addEstudiante(self):
+    def addReserva(self):
 
         id_estudiante = str(self.txt_id_estudiante.text())
-        libro = str(self.txt_nombre_libro.text())
+        libro_isbn = str(self.txt_nombre_libro.text())
         fch_a_reservar = str(self.txt_fch_a_reservar.text())
         fch_reserva = str(self.txt_fch_reserva.text())
         hora_reserva=str(self.txt_hora_reserva.text())
 
-        if id_estudiante == '' or libro == '' or fch_a_reservar == '' or fch_reserva == '' or hora_reserva == '':
+        if id_estudiante == '' or libro_isbn == '' or fch_a_reservar == '' or fch_reserva == '' or hora_reserva == '':
             self.lbl_info.setText('Datos incorrectos')
 
-        # elif id_estudiante in data.reg_estudiantes:
-        #     self.lbl_info.setText('Datos duplicados')
+        elif not validateEstudiante(id_estudiante):
+            self.lbl_info.setText('Estudiante no Registado')
+
+        elif not validateLibro(libro_isbn):
+            self.lbl_info.setText('Libro no Registado')
         else:
-            data.reg_reservas.add(id_estudiante, libro, fch_a_reservar, fch_reserva, hora_reserva)
+            # Agregar la reserva
+            reg_estudiantes = loadD('e')
+            estudiante = reg_estudiantes.encontrar_estudiante(id_estudiante)
+
+            reg_libro = loadD('l')
+
+            libro = reg_libro.encontrar_libro(libro_isbn)
+
+            reg_reservas = loadD('r')
+
+            reg_reservas.add(estudiante, libro, fch_a_reservar, fch_reserva, hora_reserva)
+
+            saveD('r', reg_reservas)
+
             self.lbl_info.setText('Reserva Agregada')
             self.clear_campos()
 
@@ -71,12 +86,12 @@ class NewReservaWindow(QtGui.QWidget):
         lbl_hora_reserva.move(50, 225)
         self.txt_hora_reserva.move(200, 225)
 
-        self.lbl_info.move(200, 220)
+        self.lbl_info.move(200, 255)
         self.lbl_info.resize(200, 20)
 
     def createButtons(self):
         okBtn = QtGui.QPushButton('OK')
-        okBtn.clicked.connect(self.addEstudiante)
+        okBtn.clicked.connect(self.addReserva)
         cancelBtn = QtGui.QPushButton('Cancelar')
         cancelBtn.clicked.connect(self.close)
         hbox = QtGui.QHBoxLayout()

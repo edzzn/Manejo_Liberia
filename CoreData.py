@@ -8,23 +8,48 @@ class Estudiante():
         self.lastname = lastname
 
     def __str__(self):
-        return (self.get_id() + " " + self.get_name() + " " + self.get_lastname())
+        return (self.id + " " + self.name + " " + self.lastname)
 
     def print_estudiante(self):
-        return (self.get_id() + " " + self.get_name() + " " + self.get_lastname())
+        return (self.id + " " + self.name + " " + self.lastname)
 
     def edit(self, name, lastname):
         self.name = name
         self.lastname = lastname
 
-    def get_id(self):
-        return self.id
+class RegistroEstudiante():
+    def __init__(self):
+        self.reg_estudiante = []
 
-    def get_name(self):
-        return self.name
+    def add(self, Estudiante):
+        self.reg_estudiante.append(Estudiante)
 
-    def get_lastname(self):
-        return self.lastname
+    def mostrar(self):
+        for estudiante in self.reg_estudiante:
+            print(estudiante)
+
+    def edit_estudiante(self, estudiante_id, estudiante):
+        position_list = self.get_estudiante_loc(estudiante_id)
+        self.registro_estudiante[position_list] = estudiante
+
+    def delete_estudiante(self, estudiante_id):
+        position_list = self.get_estudiante_loc(estudiante_id)
+        del self.registro_estudiante[position_list]
+
+    def encontrar_estudiante(self, estudiante_id):
+        for estudiante in self.reg_estudiante:
+            if estudiante.id == estudiante_id:
+                print(True)
+                return estudiante
+        else:
+            return None
+
+    def valida_estudiante(self, cedula):
+        for estudiante in self.reg_estudiante:
+            if estudiante.id == cedula:
+                return True
+        else:
+            return False
 
 class Libro():
     def __init__(self, isbn, numPag, idioma, autor, editorial, categoria):
@@ -36,10 +61,10 @@ class Libro():
         self.categoria=categoria
 
     def __str__(self):
-        return (self.get_isbn() + " " + self.get_numPag() + " " + self.get_idioma() + " " + self.get_autor() + " " + self.get_editorial() + " " + self.get_categoria())
+        return (self.isbn + " " + self.numPag + " " + self.idioma + " " + self.autor + " " + self.editorial + " " + self.categoria)
 
     def print_libro(self):
-        return (self.get_isbn() + " " + self.get_numPag() + " " + self.get_idioma() + " " + self.get_autor() + " " + self.get_editorial() + " " + self.get_categoria())
+        return (self.isbn + " " + self.numPag + " " + self.idioma + " " + self.autor + " " + self.editorial + " " + self.get_categoria())
 
     def edit(self, numPag, idioma, autor, editorial, categoria):
         self.numPag = numPag
@@ -48,26 +73,38 @@ class Libro():
         self.editorial = editorial
         self.categoria = categoria
 
-    def get_isbn(self):
-        return self.isbn
 
-    def get_numPag(self):
-        return self.numPag
+class RegistroLibro():
+    def __init__(self):
+        self.reg_libro = []
 
-    def get_idioma(self):
-        return self.idioma
+    def add(self, Libro):
+        self.reg_libro.append(Libro)
 
-    def get_autor(self):
-        return self.autor
+    def mostrar(self):
+        for libro in self.reg_libro:
+            print(libro)
 
-    def get_editorial(self):
-        return self.editorial
+    def get_registro(self):
+        return self.reg_libro
 
-    def get_categoria(self):
-        return self.categoria
+    def edit_libro(self, libro_isbn, libro):
+        position_list = self.get_libro_loc(libro_isbn)
+        self.__registro_libro[position_list] = libro
+
+    def delete_libro(self, libro_isbn):
+        position_list = self.get_libro_loc(libro_isbn)
+        del self.reg_libro[position_list]
+
+    def encontrar_libro(self, libro_isbn):
+        for libro in self.reg_libro:
+            if libro.isbn == libro_isbn:
+                return libro
+        else:
+            return None
 
 
-class categoria():
+class Categoria():
     def __init__(self, codigo, descripcion):
         self.codigo=codigo
         self.descripcion=descripcion
@@ -81,11 +118,33 @@ class categoria():
     def edit(self, descripcion):
         self.descripcion = descripcion
 
-    def get_codigo(self):
-        return self.codigo
 
-    def get_descripcion(self):
-        return self.descripcion
+class RegistroCategoria():
+    def __init__(self):
+        self.registro_categoria = []
+
+    def add(self, Categoria):
+        self.registro_categoria.append(Categoria)
+
+    def mostrar(self):
+        for categoria in self.registro_categoria:
+            print(categoria)
+
+    def edit_categoria(self, categoria_codigo, categoria):
+        position_list = self.get_categoria_loc(categoria_codigo)
+        self.__registro_categoria[position_list] = categoria
+
+    def delete_categoria(self, categoria_codigo):
+        position_list = self.get_categoria_loc(categoria_codigo)
+        del self.__registro_categoria[position_list]
+
+    def encontrar_categoria(self, categoria_codigo):
+        for categoria in self.__registro_categoria:
+            if categoria.get_codigo() == categoria_codigo:
+                return categoria
+        else:
+            return None
+
 
 class RegistroReserva():
 
@@ -97,8 +156,10 @@ class RegistroReserva():
     def add(self, estudiante, libro, fechaAReservar, fechaReserva, HoraReserva):
         nuevo_registro = (libro, fechaAReservar, fechaReserva, HoraReserva)
         self.num_reservaciones += 1
+
         if estudiante in self.reg_reservas:
             self.reg_reservas[estudiante].append(nuevo_registro)
+
         else:
             self.reg_reservas[estudiante] = [nuevo_registro]
 
@@ -148,6 +209,10 @@ class RegistroPrestamos():
         del self.reg_reservas[estudiante]
 
 
+# General Funciones
+
+# Serialización de archivos
+
 def saveD(tipo, objeto):
 
     file_name = get_file_name(tipo)
@@ -180,3 +245,31 @@ def get_file_name(tipo):
         return 'data_categorias.dat'
     else:
         print('No se puede guardar el archivo')
+
+def validateLibro(isbn):
+    """
+    Valida que un libro exista en el registro de libros
+    :param isbn:
+    :return: Boolean
+    """
+    reg_libros = loadD('l')
+
+    for libro in reg_libros.reg_libro:
+
+        if libro.isbn == isbn:
+            return True
+    else:
+        return False
+
+def validateEstudiante(cedula):
+    """
+    Valida que un usuario se encuentre en el registro de usuarios
+    :param cedula:
+    :return: Boolean
+    """
+    reg_estudiantes = loadD('e')
+    for estudiante in reg_estudiantes.reg_estudiante:
+        if estudiante.id == cedula:
+            return True
+    else:
+        return False
